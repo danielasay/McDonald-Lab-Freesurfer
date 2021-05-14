@@ -1,0 +1,28 @@
+#!/bin/tcsh -xef
+
+# execute command: tcsh -xef recon-all |& tee output.recon-all
+
+
+set FS_out = ~/cleveland/freesurfer
+
+set counter = 0
+set total_subs = 79
+
+cd ~/cleveland
+
+set sub = ( `cat sublist.txt` )
+
+foreach i ( $sub )
+
+cd ~/cleveland/${i}/t1
+
+recon-all \
+-subjid ${i} \
+-cw256 \
+-i ${i}_T1w.nii.gz \
+-wsatlas \
+-all \
+-sd ${FS_out}/
+
+
+end
